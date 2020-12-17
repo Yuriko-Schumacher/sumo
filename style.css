@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;900&family=Overpass:ital,wght@0,300;0,700;1,400&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Noto Serif JP", serif;
+    font-size: 18px;
+    color: #303030;
+}
+
+h1,
+h2,
+.chart--filter,
+.chart--container {
+    font-family: "Overpass", sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    margin-top: 1.5em;
+}
+
+p,
+li {
+    line-height: 1.6;
+}
+
+a:link,
+a:visited {
+    font-weight: bold;
+    color: rgb(64, 3, 126);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffd500;
+    transition: 0.4s;
+}
+
+.header--container {
+    background: linear-gradient(
+        25deg,
+        rgba(0, 0, 0) 0%,
+        rgba(64, 3, 126) 50%,
+        rgba(255, 255, 255) 100%
+    );
+}
+
+.header--content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 3em;
+}
+
+.info {
+    text-align: center;
+    font-family: "Overpass", sans-serif;
+}
+
+#main-content {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+article {
+    max-width: 800px;
+    margin: 2em auto;
+}
+
+.chart--title {
+    line-height: 1;
+}
+
+.chart--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    border: 5px solid #f5f5f5; /* added for the final project */
+}
+
+button {
+    font-family: "Overpass", sans-serif;
+    font-size: 0.8em;
+    padding: 0.01em 0.6em;
+    margin: 0.3em;
+    background-color: #f5f5f5;
+    border-radius: 0.7em;
+    border-width: 0.1em;
+    border-style: solid;
+    width: fit-content;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+.data-update > button:focus {
+    background-color: #303030;
+    color: white;
+}
+
+.data-update > button:active {
+    background-color: #303030;
+    color: white;
+}
+
+.chart--info {
+    display: flex;
+    font-size: 0.8em;
+    line-height: 1;
+    width: 90%;
+    max-width: 750px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chart--info--age {
+    flex-direction: row;
+}
+
+.chart--filters {
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    padding: 1.5em 2em 1em;
+    border-radius: 1em;
+    margin: 0.5em 1.5em 0;
+}
+
+.chart--filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+.number-input {
+    text-align: right;
+}
+
+.button {
+    align-self: center;
+    font-size: 1em;
+}
+
+.border-legend--containter {
+    margin-top: 1em;
+}
+
+.border-legend--item {
+    display: flex;
+    align-items: center;
+    margin: 0.2em;
+}
+
+.legend-circle {
+    width: 20.8px;
+    height: 20.8px;
+    display: inline-block;
+}
+
+.legend-circle--label {
+    margin: 0 0 0 0.5em;
+    display: inline-block;
+}
+
+#height-vs-weight {
+    height: 600px;
+    width: 100%;
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: fit-content; /* added for the final project */
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 0.8em;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+.sorryMessage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    text-align: center;
+    color: #acabab;
+}
+
+.oops {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+#age {
+    height: 330px;
+    width: 100%;
+    position: relative;
+}
+
+.footer {
+    height: 175px;
+    margin-top: 100px;
+    padding: 75px 20%;
+    text-align: right;
+    font-family: "Overpass", sans-serif;
+    background-color: #40037e;
+}
+
+.footer > a:link,
+.footer > a:visited {
+    color: white;
+}
+
+.footer > a:hover {
+    color: #ffd500;
+    transition: 0.6s;
+}

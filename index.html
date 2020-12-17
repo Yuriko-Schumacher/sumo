@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3-legend/1.1.0/d3-legend.js"></script>
+        <title>Analysis of sumo wrestlers</title>
+    </head>
+    <body>
+        <script src="script.js"></script>
+        <div id="header" class="header--container">
+            <div class="header--content">
+                <h1>Analysis of Sumo Wrestlers</h1>
+                <p>What is the key to become top-tier Sumo wrestlers?</p>
+                <p class="info">
+                    ARTG 5330 Final Project | December 2020<br />by Yuriko
+                    Schumacher
+                </p>
+            </div>
+        </div>
+        <div id="main-content">
+            <div id="intro">
+                <article>
+                    <h1>Introduction</h1>
+                    <p>
+                        In this project, I am analyzing Japanese Sumo
+                        wrestling's
+                        <a
+                            href="http://www.sumo.or.jp/EnSumoDataRikishi/search/search"
+                            target="_blank"
+                            >tournament ranking table (番付, <i>banzuke</i>)</a
+                        >
+                        to see what kind of wrestlers are at the top of the
+                        rankings.
+                    </p>
+                    <h2>Purpose of the project</h2>
+                    <p>
+                        I am analyzing this data because I have been asked about
+                        Sumo so much since I moved to the US (since I am from
+                        Japan), but I wasn't able to answer the questions very
+                        well. In fact, I have never watched a Sumo match in
+                        person. Through this project, I would like to learn more
+                        about Sumo wrestling, as well as be able to answer
+                        questions about the sport.
+                    </p>
+                    <h2>A little bit about Sumo</h2>
+                    <img
+                        src="./image/sumo.jpg"
+                        alt="Sumo wrestlers"
+                        width="800px"
+                    />
+                    <p>
+                        Sumo (相撲) is full-contact wrestling where two
+                        wrestlers (力士,
+                        <i>rikishi</i>) grapple and attempt to push or throw
+                        their opponent. The winner is the one who forces the
+                        opponent out of the ring or into touching the ground
+                        with any part of their body other than their feet.
+                        Generally, heavier wrestlers tend to be ranked higher
+                        since they are harder to move.
+                    </p>
+                    <p>
+                        In Japan, Sumo is practiced professionally as a national
+                        sport. Japan usually holds
+                        <a
+                            href="http://www.sumo.or.jp/EnTicket/year_schedule/"
+                            target="_blank"
+                            >The Sumo Grand Tournament</a
+                        >
+                        six times a year, and each tournament has its own
+                        tournament ranking table.
+                    </p>
+                    <p>
+                        There are about 700 wrestlers in total, and they are
+                        grouped into six divisions based on rank. The top 42
+                        wrestlers are part of a group known as "幕内,
+                        <i>makuuchi</i>".
+                    </p>
+                    <h2>Sumo <i>banzuke</i> data set</h2>
+                    <p>
+                        A data scientist
+                        <a href="http://zhilkin.com/" target="_blank"
+                            >Mikhail Zhilkin</a
+                        >
+                        put together a data set for official tournament ranking
+                        tables based on official information released by The
+                        Japan Sumo Association. I am using the data set for The
+                        2019 Sumo Grand Tournament from
+                        <a
+                            href="https://data.world/cervus/sumo-banzuke"
+                            target="_blank"
+                            >data.world</a
+                        >.
+                    </p>
+                </article>
+            </div>
+            <div id="analysis">
+                <article>
+                    <h1>Data analysis</h1>
+                    <p>
+                        For this project, I am comparing the data for top 42
+                        wrestlers over 20 years, quinquennially. I am analyzing
+                        January's tournament data for each year.
+                    </p>
+                    <p>
+                        First, I am visualizing the top 42 wrestlers' weight and
+                        height, as well as their place of birth and ranking. I
+                        am also creating a second visualization that shows the
+                        number of wrestlers for each age and their countries of
+                        birth and ranks, over the years. These analyses were
+                        motivated by the following questions:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>Are Mongolian wrestlers really strong?</b> I hear
+                            many strong wrestlers are from Mongolia, so I would
+                            like to know if this is true.
+                        </li>
+                        <li>
+                            <b>The taller/heavier, the better?</b> I would like
+                            to know if there is a correlation between the
+                            wrestler's height/weight and their rank.
+                        </li>
+                        <li>
+                            <b>What's the best age for sumo wrestlers?</b> As
+                            much as sumo is a physical sport, I know there are
+                            many wrestlers in their late 30s who are ranked high
+                            in Makuuchi division. I'd like to know the general
+                            tendency in terms of wrestler's age and rank.
+                        </li>
+                    </ul>
+                    <p>
+                        I conducted the initial analysis using R. The original
+                        data sets are seperated by the years, and each has
+                        rankings for all six tournaments held in that year.
+                    </p>
+                    <p>
+                        Therefore, for each year's data, I filtered the rows to
+                        only show January's top 42 wrestlers, and then combined
+                        the five seperated data sets. I also converted kilograms
+                        into pounds, centimeters into feet, and birth dates into
+                        ages (as of the time each tournament table was
+                        published).
+                    </p>
+                    <p>
+                        The cleaned data has 210 rows and 12 columns. Each row
+                        represents a wrestler. The columns are as follows:
+                    </p>
+                    <ul>
+                        <li>
+                            <b>basho</b>: The year and month the tournament was
+                            held
+                        </li>
+                        <li><b>rank</b>: The wrestler's rank (1 to 42)</li>
+                        <li><b>rikishi</b>: The wrestler's name</li>
+                        <li>
+                            <b>shusshin</b>: The wrestler's country of birth
+                        </li>
+                        <li>
+                            <b>country</b>: The wrestler's country of birth
+                            (Japan, Mongolia, or elsewhere)
+                        </li>
+                        <li>
+                            <b>weight_pounds</b>: The wresler's weight (lbt)
+                        </li>
+                        <li><b>height_feet</b>: The wresler's height (ft)</li>
+                        <li>
+                            <b>height_feet_floor</b>: The wrestler's height (ft)
+                            downwords to the nearest integer
+                        </li>
+                        <li>
+                            <b>height_inches_reminder</b>: The wrestler's height
+                            in inches subtracted by the value of
+                            heigh_feet_floor
+                        </li>
+                        <li>
+                            <b>age</b>: The wresler's age (as of the time the
+                            tournament table was published)
+                        </li>
+                        <li>
+                            <b>count</b>: The wrestler's rank inside of the same
+                            age for the year
+                        </li>
+                    </ul>
+                </article>
+            </div>
+            <div id="visualization">
+                <article>
+                    <h1>Visualization</h1>
+                    <p>
+                        Here, I'm creating two data visualizations. The first
+                        visualization shows 1) where the topmost wrestlers are
+                        from, and tires to find out 2) if taller/heavier
+                        wrestlers are higher-ranked, over two decades. The
+                        second one demonstrates how many wrestlers were at what
+                        age on the top 42 tournament table over time.
+                    </p>
+                    <h2>1. Relationships between height/weight and rank</h2>
+                    <p>
+                        For the first visualization, I created a scatter plot.
+                        Inside the scatter plot, each circle represents a
+                        wrestler in the Makuuchi (top 42) division. The x-axis
+                        shows the wrestler's weight in lbs, while the y-axis
+                        shows the wrestler's height in feet. The color shows the
+                        wrestler's rank (from 1 to 42). The circle(s) with
+                        yellow strokes represent wrestlers from Mongolia, in
+                        order to distinguish them easily since one of the
+                        questions I'm trying to answer is if Mongolian wrestlers
+                        are stronger in general.
+                    </p>
+                    <p>
+                        By clicking the buttons from January 1999 to January
+                        2019, you can select which year's data to show. The
+                        original chart shows data for January 1999.
+                    </p>
+                    <p>
+                        There is also a filter feature that can apply to each
+                        year's visualization. By clicking the checkboxes, you
+                        can filter the wrestlers by whether they are from Japan,
+                        Mongolia, or other countries. At the same time, you can
+                        change the minumum and maximum ranks of the wrestlers
+                        shown. If you change the data's year, the filter feature
+                        will reset automatically and the scatter plot will have
+                        42 circles to show.
+                    </p>
+                    <p>
+                        In any of the state, you can see a wrestler's detailed
+                        information in a tooltip by hovering over a circle.
+                    </p>
+                </article>
+                <div class="chart--container">
+                    <div class="chart--title">
+                        <h3>
+                            Makuuchi (top 42) Sumo wrestler's height/weight and
+                            rank, country of birth<br />Sumo Grand Tournament
+                            1999 ~ 2019
+                        </h3>
+                    </div>
+                    <div class="data-update">
+                        <button id="year1999" autofocus>January 1999</button>
+                        <button id="year2004">January 2004</button>
+                        <button id="year2009">January 2009</button>
+                        <button id="year2014">January 2014</button>
+                        <button id="year2019">January 2019</button>
+                    </div>
+                    <div class="chart--info">
+                        <div class="chart--filters">
+                            <div class="chart--filter">
+                                <div class="checkboxes-for-countries">
+                                    <b>Show wrestles from</b><br />
+                                    <input
+                                        type="checkbox"
+                                        class="checkbox-for-country"
+                                        value="Japan"
+                                        checked
+                                    />
+                                    Japan<br />
+                                    <input
+                                        type="checkbox"
+                                        class="checkbox-for-country"
+                                        value="Mongolia"
+                                        checked
+                                    />
+                                    Mongolia<br />
+                                    <input
+                                        type="checkbox"
+                                        class="checkbox-for-country"
+                                        value="Foreign"
+                                        checked
+                                    />
+                                    Elsewhere
+                                </div>
+                                <div class="number-input">
+                                    <b
+                                        >Filter by wrestler's<br />overall rank
+                                        (1 to 42)</b
+                                    ><br /><br />from:
+                                    <input
+                                        type="number"
+                                        name="rank"
+                                        class="rank-range"
+                                        id="rank-range-min"
+                                        value="1"
+                                        min="1"
+                                        max="42"
+                                    />
+                                    to:
+                                    <input
+                                        type="number"
+                                        name="rank"
+                                        class="rank-range"
+                                        id="rank-range-max"
+                                        value="42"
+                                        min="1"
+                                        max="42"
+                                    /><br />
+                                </div>
+                            </div>
+                            <button class="button">Apply filters</button>
+                        </div>
+                        <div class="legends">
+                            <div class="color-legend">
+                                <b>Rank</b>　　
+                                <img src="image/legend.png" width="200" />
+                            </div>
+                            <div class="border-legend--containter">
+                                <div class="border-legend--item">
+                                    <div
+                                        class="legend-circle-mongolia legend-circle"
+                                    ></div>
+                                    <div class="legend-circle--label">
+                                        Mongolian wrestlers
+                                    </div>
+                                </div>
+                                <div class="border-legend--item">
+                                    <div
+                                        class="legend-circle-elsewhere legend-circle"
+                                    ></div>
+                                    <div class="legend-circle--label">
+                                        Wrestlers from elsewhere
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="height-vs-weight"></div>
+                </div>
+                <article>
+                    <h2>Findings from the visualization</h2>
+                    <p>The visualization demonstrates a few facts:</p>
+                    <ul>
+                        <li>
+                            Although there are occasional outliers, most of the
+                            Makuuchi wrestlers weigh around 280 ~ 400 pounds.
+                            Conversely, we can't see any strong tendencies of
+                            their height.
+                        </li>
+                        <li>
+                            It's not necessarily true that the taller/heavier
+                            the wrestlers are, the stronger. For example, in
+                            January 1999, <b>Wakanohana</b> (5'11", 289lbs) is
+                            ranked 2nd, whereas <b>Akebono</b> (6'8", 501lbs)
+                            and <b>Musashimaru</b>
+                            (6'3", 474lbs) are ranked 3rd and 4th respectively.
+                        </li>
+                        <li>
+                            More and more Mogolian wrestlers are coming into the
+                            Makuuchi division over the two decades. The numbers
+                            of Mongolian wrestlers increase from 1 (January
+                            1999) → 4 → 9 → 10 → 6 (January 2019). The rumor --
+                            that Mongolian wrestlers are generally strong --
+                            appears to be only true in recent years. Still, most
+                            Makuuchi wrestlers are Japanese over all.
+                        </li>
+                    </ul>
+                    <h2>2. Makuuchi wrestler's age distribution</h2>
+                    <p>
+                        Next, I'm going to visualize how many wreslers are at
+                        what age in the Makuuchi (top 42) division.
+                    </p>
+                    <p>
+                        Similar to the first chart, each circle represents a
+                        wrestler, and the circle's color represents the
+                        wrestler's rank (1 to 42). Mongolian wrestlers are
+                        highlighted as yellow.
+                    </p>
+                    <p>
+                        The x-axis shows the wrestler's age (when the tournament
+                        table was published), and the y-axis shows the number of
+                        wrestlers at each age. By selecting the button on top
+                        (from January 1999 to January 2019), you can select
+                        which year's data to show. Originally, the visualization
+                        represents the data for January 1999.
+                    </p>
+                </article>
+                <div class="chart--container">
+                    <div class="chart--title">
+                        <h3>
+                            Makuuchi (top 42) Sumo wrestler's age and rank<br />Sumo
+                            Grand Tournament 1999 ~ 2019
+                        </h3>
+                    </div>
+                    <div class="data-update">
+                        <button id="year1999ForAge">January 1999</button>
+                        <button id="year2004ForAge">January 2004</button>
+                        <button id="year2009ForAge">January 2009</button>
+                        <button id="year2014ForAge">January 2014</button>
+                        <button id="year2019ForAge">January 2019</button>
+                    </div>
+                    <div class="chart--info chart--info--age">
+                        <div class="color-legend">
+                            <b>Rank</b>　　
+                            <img src="image/legend.png" width="200" />
+                        </div>
+                        <div class="border-legend--containter">
+                            <div class="border-legend--item">
+                                <div
+                                    class="legend-circle-mongolia legend-circle"
+                                ></div>
+                                <div class="legend-circle--label">
+                                    Mongolian wrestlers
+                                </div>
+                            </div>
+                            <div class="border-legend--item">
+                                <div
+                                    class="legend-circle-elsewhere legend-circle"
+                                ></div>
+                                <div class="legend-circle--label">
+                                    Wrestlers from elsewhere
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="age"></div>
+                </div>
+                <article>
+                    <h2>Findings from the visualization</h2>
+                    <p>The visualization demonstrates a few facts:</p>
+                    <ul>
+                        <li>
+                            Many high-ranked Makuuchi wrestlers are late 20s and
+                            early 30s. Younger and older wrestlers occasionally
+                            do well, such as <b>Asashoryu</b> (from January
+                            2004, age: 23, rank: 1), and <b>Kaio</b> (from
+                            January 2009, age: 36, rank: 6).
+                        </li>
+                        <li>
+                            <b>Kyokutenho</b> (from January 2014, age: 39, rank:
+                            39) was an unusually old wrestler to be registered
+                            in the Makuuchi division.
+                        </li>
+                        <li>
+                            You can find many wrestlers who stay in the Makuuchi
+                            division over the years such as
+                            <b>Chiyotaikai</b> (from January 2004, age: 27,
+                            rank: 3 / from January 2009, age: 32, rank: 4) and
+                            <a
+                                href="http://www.sumo.or.jp/EnSumoDataRikishi/profile/2320/index.php/"
+                                target="_blank"
+                                ><b>Hakuho</b></a
+                            >
+                            (from January 2009, age: 23, rank: 1 / from January
+                            2014, age: 28, rank: 2 / from January 2019, age: 33:
+                            rank: 2). Those wrestlers are the most successful
+                            ones who stay atop over many years throughout their
+                            career.
+                        </li>
+                    </ul>
+                    <p>
+                        From these findings, it can be said that elements like
+                        wrestler's height/weight, place of birth, and age matter
+                        to a certain degree, but there seem to be many more
+                        factors that break the general tendency and determine
+                        their sumo-wrestling skills.
+                    </p>
+                </article>
+            </div>
+        </div>
+        <div class="footer">
+            <a href="#header">Back to Top</a>
+        </div>
+    </body>
+</html>
